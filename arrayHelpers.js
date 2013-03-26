@@ -92,6 +92,13 @@ Array.prototype.clear! = function() {
     this.length = 0;
 };
 
+/* remove the elements starting at 'from' til position 'to' */
+Array.prototype.remove = function(from, to) {
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
+};
+
 /* rotate array by the given steps */
 Array.prototype.rotate! = function(p) {
     for(var l = this.length, p = (Math.abs(p) >= l && (p %= l), p < 0 && (p += l), p), i, x; p; p = (Math.ceil(l / p) - 1) * p - l + (l = p))
