@@ -1,5 +1,5 @@
 /******************************************************************************
-Useful helper functions for different array manipulations
+Useful helper functions for different number manipulations
 Copyright (C) 2010 The Otrax Project / Lukas Diener
 
 This program is free software; you can redistribute it and/or
