@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 *******************************************************************************/
 
 /* sort an array faster than the native Array.sort method */
-Array.prototype.insertSort! = function() {
+Array.prototype.insertSort = function() {
   for (var i = 1; i < this.length; i++) {
     var tmp = this[i],
         j = i;
@@ -31,7 +31,7 @@ Array.prototype.insertSort! = function() {
 }
 
 /* sort an array of objects by a specific property */
-Array.prototype.sortBy! = function( property ) {
+Array.prototype.sortBy = function( property ) {
   for (var i = 1; i < this.length; i++) {
     var tmp = this[i],
         j = i;
@@ -70,7 +70,7 @@ Array.prototype.sum = function() {
 }
 
 /* cut array into chunks of specified size */
-Array.prototype.chunk(s) {
+Array.prototype.chunk = function(s) {
     for(var x, i = 0, c = -1, l = this.length, n = []; i < l; i++)
         (x = i % s) ? n[c][x] = this[i] : n[++c] = [this[i]];
     return n;
@@ -88,7 +88,7 @@ Array.prototype.contains = function(element) {
 };
 
 /* clear array */
-Array.prototype.clear! = function() {
+Array.prototype.clear = function() {
     this.length = 0;
 };
 
@@ -100,7 +100,17 @@ Array.prototype.remove = function(from, to) {
 };
 
 /* rotate array by the given steps */
-Array.prototype.rotate! = function(p) {
+Array.prototype.rotate = function(p) {
     for(var l = this.length, p = (Math.abs(p) >= l && (p %= l), p < 0 && (p += l), p), i, x; p; p = (Math.ceil(l / p) - 1) * p - l + (l = p))
         for(i = l; i > p; x = this[--i], this[i] = this[i - p], this[i - p] = x);
 };
+
+/* random permutation */
+Array.prototype.shuffle = function() {
+    for (var i = this.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = this[i];
+        this[i] = this[j];
+        this[j] = temp;
+    }
+}
