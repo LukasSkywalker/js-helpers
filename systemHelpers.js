@@ -28,3 +28,21 @@ function chain(fn) {
         return fn.apply(this, arguments) || this;
     }
 }
+
+/* merge two objects recursively, modifying obj1 */
+function mergeRecursive(obj1, obj2) {
+    for (var p in obj2) {
+        if (obj2.hasOwnProperty(p)) {
+            try {
+                if ( obj2[p].constructor==Object ) {
+                    obj1[p] = MergeRecursive(obj1[p], obj2[p]);
+                } else {
+                    obj1[p] = obj2[p];
+                }
+            } catch(e) {
+                obj1[p] = obj2[p];
+            }
+        }
+    }
+    return obj1;
+}

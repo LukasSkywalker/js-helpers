@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 *******************************************************************************/
 
 /* trim leading and trailing whitespace from a string */
-String.prototype.trim! = function() {
+String.prototype.trim = function() {
   this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 }
 
@@ -28,6 +28,17 @@ String.prototype.capitalize = function() {
 };
 
 /* add ellipses after the specified leng... */
-String.prototype.ellipses = function(len) { 
-  return (this.length > len) ? this.substr(0, len) + "..." : this; 
+String.prototype.ellipses = function(len) {
+  return (this.length > len) ? this.substr(0, len) + "..." : this;
 }
+
+/* "format {0} string {1}".format("any", "you want") */
+String.prototype.format = function() {
+  var args = arguments;
+  return this.replace(/{(\d+)}/g, function(match, number) {
+    return typeof args[number] != 'undefined'
+      ? args[number]
+      : match
+    ;
+  });
+};
