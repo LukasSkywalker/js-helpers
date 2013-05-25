@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 Array.prototype.insertSort = function() {
   for (var i = 1; i < this.length; i++) {
     var tmp = this[i],
-        j = i;
+      j = i;
     while (this[j - 1] > tmp) {
       this[j] = this[j - 1];
       --j;
@@ -55,12 +55,12 @@ Array.prototype.pluck = function( property ) {
 
 /* get the max value of an array */
 Array.prototype.max = function () {
-    return Math.max.apply(Math, this);
+  return Math.max.apply(Math, this);
 };
 
 /* get the min value of an array */
 Array.prototype.min = function () {
-    return Math.min.apply(Math, this);
+  return Math.min.apply(Math, this);
 };
 
 /* sum up all elements in the array */
@@ -71,46 +71,77 @@ Array.prototype.sum = function() {
 
 /* cut array into chunks of specified size */
 Array.prototype.chunk = function(s) {
-    for(var x, i = 0, c = -1, l = this.length, n = []; i < l; i++)
-        (x = i % s) ? n[c][x] = this[i] : n[++c] = [this[i]];
-    return n;
+  for(var x, i = 0, c = -1, l = this.length, n = []; i < l; i++)
+    (x = i % s) ? n[c][x] = this[i] : n[++c] = [this[i]];
+  return n;
 }
 
 /* check of an array contains a specific element */
 Array.prototype.contains = function(element) {
-    var i = this.length;
-    while (i--) {
-        if (this[i] === element) {
-            return true;
-        }
+  var i = this.length;
+  while (i--) {
+    if (this[i] === element) {
+      return true;
     }
-    return false;
+  }
+  return false;
 };
 
 /* clear array */
 Array.prototype.clear = function() {
-    this.length = 0;
+  this.length = 0;
 };
 
 /* remove the elements starting at 'from' til position 'to' */
 Array.prototype.remove = function(from, to) {
-    var rest = this.slice((to || from) + 1 || this.length);
-    this.length = from < 0 ? this.length + from : from;
-    return this.push.apply(this, rest);
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
+/* remove the element equalling 'value' */
+Array.prototype.removeByValue = function (value) {
+  for (var i = 0; i < this.length; ) {
+    if (this[i] === value) {
+      this.splice(i, 1);
+    } else {
+     ++i;
+    }
+  }
 };
 
 /* rotate array by the given steps */
 Array.prototype.rotate = function(p) {
-    for(var l = this.length, p = (Math.abs(p) >= l && (p %= l), p < 0 && (p += l), p), i, x; p; p = (Math.ceil(l / p) - 1) * p - l + (l = p))
-        for(i = l; i > p; x = this[--i], this[i] = this[i - p], this[i - p] = x);
+  for(var l = this.length, p = (Math.abs(p) >= l && (p %= l), p < 0 && (p += l), p), i, x; p; p = (Math.ceil(l / p) - 1) * p - l + (l = p))
+    for(i = l; i > p; x = this[--i], this[i] = this[i - p], this[i - p] = x);
 };
 
 /* random permutation */
 Array.prototype.shuffle = function() {
-    for (var i = this.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = this[i];
-        this[i] = this[j];
-        this[j] = temp;
-    }
-}
+  for (var i = this.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = this[i];
+    this[i] = this[j];
+    this[j] = temp;
+  }
+};
+
+/* check if array is empty */
+Array.prototype.isEmpty = function (){
+  return this.length === 0;
+};
+
+/* get the index of the last occurence of a specified element */
+Array.prototype.lastIndexOf = function(element) {
+  for (var i = this.length - 1; i >= 0; i--) {
+    if (element === this[i])
+      return i;
+  }
+  return null;
+};
+
+/* return last element of array*/
+Array.prototype.last = function() {
+  return this[this.length - 1];
+};
+
